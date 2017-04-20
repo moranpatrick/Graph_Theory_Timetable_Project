@@ -8,6 +8,7 @@
 [Stored Data](#storedData)    
 [How The Data was Retrieved](#howDataRetrieved)  
 [Implementation](#implementation)  
+[Queries](#Queries)  
 [Conclusion](#conclusion)  
 [References](#references)
 
@@ -65,7 +66,27 @@ I then started to put together all the csv files I would need to populate the da
 
 
 ## Stored Data<a name = "storedData"></a>  
+Below is Information about All the nodes and relationships stored in the database.
 
+##### Nodes Used
+| Nodes |  Attribute(s) | Description |
+|-------|---------------|-------------|
+|Student | Name, Group ID | Every Student has a Name and Group ID they belong too. eg Patrick Moran, A|
+|Group | Group ID | The group node has a group ID Attribute to which a student belongs. |
+|TimeSlot |Name | The Time has a name attribute which stores the day and time of a lecture eg. mon0900 is Monday at 9am.|
+|Subject| Code, Name | Every Subject has a code and a name eg. 48901, Graph Theory |
+|Lecturer | Name | This node has an attribute called name eg. Ian McLoughlin |
+|Room | Name, Capacity | The Room Node contains a name eg. 0995 and a capacity eg. 50|  
+
+##### Relationships Between The Nodes
+|Relationship|Description|Example|
+|------------|-----------|-------|
+|BELONGS_TO| A student BELONGS TO a group.| Patrick BELONGS TO Group A|
+|ATTENDS| A group ATTENDS at a certain day/time| Group B ATTENDS at 9am on Monday|
+|TAUGHT_AT| A subject is TAUGHT AT a certain day/time| Graph Theory is TAUGHT AT 2pm on a Monday|
+|TEACHES_AT| A Lecturer TEACHES AT a certain day/time| Ian McLoughlin TEACHES AT 2pm on a Monday|
+|ROOM_FOR| This is the ROOM FOR this day/time| 995 is the ROOM FOR Wednesday at 4pm |
+|LECTURING| A Lecturer is LECTURING in this subject | Ian McLoughlin is LECTURING Graph Theory |
 
 
 
@@ -75,6 +96,9 @@ I then started to put together all the csv files I would need to populate the da
 [Top](#contents)
 
 ## Implementation<a name = "implementation"></a>
+[Top](#contents)  
+
+## Queries<a name = "queries"></a>
 [Top](#contents)
 
 ## Conclusion<a name = "conclusion"></a>
