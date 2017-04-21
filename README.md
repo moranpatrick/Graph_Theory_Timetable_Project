@@ -168,11 +168,26 @@ For each row in the csv file a relationship is created between the subject and t
 [Top](#contents)  
 
 ## Queries<a name = "queries"></a>
+This is a list of queries I put together after I completed the database.  
+1. This Query shows me all the times on a Monday that Ian McLoughlin is lecturing at.
+```
+MATCH (l:Lecturer)-[r:TEACHES_AT]->(t:TimeSlot) WHERE l.Name = "Ian McLoughlin" AND t.Name  CONTAINS 'mon' RETURN l,t
+```
 
+2. This query returns a list of rooms, that are used on a Monday, with a room capacity greater than 50.
+```
+MATCH (r1:Room)-[r2:ROOM_FOR]->(t:TimeSlot) WHERE toInt(r1.Capacity) > 50 AND t.Name CONTAINS 'monday' RETURN DISTINCT r1.Name;
+```
+
+3. This query returns a list of group A students who have any graph theory lectures on a Monday.
+```
+MATCH (s1:Student {GrpId: "A"})-[r1:BELONGS_TO]->(g:Group)-[r2:ATTENDS]->(t:TimeSlot)<-[r3:TAUGHT_AT]-(s2:Subject) WHERE t.Name CONTAINS 'mon' AND s2.Name = 'Graph Theory' RETURN DISTINCT s1.Name
+```
 
 [Top](#contents)
 
 ## Conclusion<a name = "conclusion"></a>
+
 [Top](#contents)
 
 ## References<a name = "references"></a>
