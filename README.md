@@ -8,7 +8,7 @@
 [Stored Data](#storedData)    
 [How The Data was Retrieved](#howDataRetrieved)  
 [Implementation](#implementation)  
-[Queries](#Queries)  
+[Queries](#queries)  
 [Conclusion](#conclusion)  
 [References](#references)
 
