@@ -92,7 +92,10 @@ Below is Information about All the nodes and relationships stored in the databas
 
 [Top](#contents)
 
-## How The Data was Retrieved<a name ="howDataRetrieved"></a>
+## How The Data was Retrieved<a name ="howDataRetrieved"></a>  
+While some data was entered manually, for example the fake list of students I created, most of the data for my neo4j database was taken from our [gmit](http://timetable.gmit.ie/) timetable.
+I used view page source to find all the information I needed after which I copied and pasted that data into notepad++. Once in notepad++, I was able to manipulate the data using some of the text editors handy features.
+
 [Top](#contents)
 
 ## Implementation<a name = "implementation"></a>  
@@ -119,6 +122,8 @@ List of csv files used.
   * TimeSlot Lecturer Relationship
   * Time Subject Relationship
   * Time Room Relationship  
+
+To use these csv files with neo4j I had to create a folder called import and then put all those files in there. The import folder needs to be located in the default.graphdb folder inside the neo4j folder on your computer.
 
 These csv files can be found in the CSV_Files folder at the [Top](#contents) of this readme. I found [Notepad++](https://notepad-plus-plus.org/download/v7.3.3.html) very useful for Creating and editing those csv files.
 
@@ -163,6 +168,8 @@ For each row in the csv file a relationship is created between the subject and t
 [Top](#contents)  
 
 ## Queries<a name = "queries"></a>
+
+
 [Top](#contents)
 
 ## Conclusion<a name = "conclusion"></a>
