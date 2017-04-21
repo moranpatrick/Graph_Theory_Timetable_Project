@@ -187,9 +187,9 @@ MATCH (s1:Student {GrpId: "A"})-[r1:BELONGS_TO]->(g:Group)-[r2:ATTENDS]->(t:Time
 [Top](#contents)
 
 ## Conclusion<a name = "conclusion"></a>
-Even though I'm more familiar with Relational Database systems, for example sql, I found Neo4j to have a much more modern approach to dealing with your data. This modern approach allows your data to be represented visually and is quite a testament to there system.
+Even though I'm more familiar with Relational Database systems, for example sql, I found Neo4j to have a much more modern approach to dealing with your data. This modern approach allows your data to be represented visually and is quite a testament to their system.
 
-Cypher may appear hard to get your head around at first, but once your running neo4j on your system there are excellent tutorials provided for you to get you started no matter what your level is.
+Cypher may appear hard to get your head around at first, but once your running neo4j on your system there are excellent tutorials provided for you to get you started no matter what your level is. These tutorials are available on the neo4j client.
 
 Overall I found the project quite challenging, but when broken down into small steps, the task did become much easier.
 
