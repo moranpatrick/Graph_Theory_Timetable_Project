@@ -187,12 +187,20 @@ MATCH (s1:Student {GrpId: "A"})-[r1:BELONGS_TO]->(g:Group)-[r2:ATTENDS]->(t:Time
 [Top](#contents)
 
 ## Conclusion<a name = "conclusion"></a>
+Even though I'm more familiar with Relational Database systems, for example sql, I found Neo4j to have a much more modern approach to dealing with your data. This modern approach allows your data to be represented visually and is quite a testament to there system.
+
+Cypher may appear hard to get your head around at first, but once your running neo4j on your system there are excellent tutorials provided for you to get you started no matter what your level is.
+
+Overall I found the project quite challenging, but when broken down into small steps, the task did become much easier.
 
 [Top](#contents)
 
 ## References<a name = "references"></a>
 * http://info.neo4j.com/rs/773-GON-065/images/neo4j_logo.png  
+* https://neo4j.com/docs/
 * https://en.wikipedia.org/wiki/Neo4j  
 * https://neo4j.com/developer/cypher-query-language/    
+* http://www.apcjones.com/arrows/  
+* http://neo4j.com/docs/developer-manual/current/cypher/clauses/load-csv/
 
 [Top](#contents)  
