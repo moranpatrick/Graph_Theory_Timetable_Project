@@ -58,7 +58,7 @@ Using a handy tool online, [ApcJones](http://www.apcjones.com/arrows/), I was ab
 This was the Result:  
 
 ##### Database Design
-![alt text](database_design.PNG)  
+![alt text](images/database_design.PNG)  
 
 I then started to put together all the csv files I would need to populate the database. More information on how I retrieved the data for the csv files can be found [here](#howDataRetrieved).
 
@@ -95,7 +95,67 @@ Below is Information about All the nodes and relationships stored in the databas
 ## How The Data was Retrieved<a name ="howDataRetrieved"></a>
 [Top](#contents)
 
-## Implementation<a name = "implementation"></a>
+## Implementation<a name = "implementation"></a>  
+Implementation of the database was broken down into three stages.
+1. Create The csv files
+2. Creating Nodes
+3. Creating Relationships between the nodes
+
+###### Creating The CSV Files
+After some research online, I thought the best way to import data into the neo4j database, was with the use of csv files.  
+List of csv files used.  
+
+* For Nodes  
+  * Student    
+  * Student Group  
+  * Subject
+  * Rooms
+  * Lecturers
+  * Time Slot   
+
+
+* For Relationships
+  * TimeSlot Group Relationships
+  * TimeSlot Lecturer Relationship
+  * Time Subject Relationship
+  * Time Room Relationship  
+
+These csv file can be found in the CSV_Files folder at the [Top](#contents) of this readme. I found [Notepad++](https://notepad-plus-plus.org/download/v7.3.3.html) very useful for Creating and editing those csv files.
+
+###### Creating Nodes
+To show how I create these nodes, here is a snippet of the csv file.    
+![alt text](images/snip1.PNG)  
+Here is the command I used to created the Student Nodes from that csv file.  
+```
+LOAD CSV WITH HEADERS FROM "file:///C:/student.csv" AS csvLine
+CREATE (s:Student {  Name: csvLine.name, GrpId: csvLine.grpId})  
+```
+Name and grpId are the column headers and every Student node created has 2 attributes, name and group id.
+I then repeated this process for student group, subject, room, lecturer and time slot.
+###### Creating Relationships
+This is how I created the relationship between the Students and the groups.  
+```
+MATCH (n:Student {GrpId:"A"}), (m:Group {GrpId:"A"}) CREATE(n)-[:BELONGS_TO]->(m) RETURN n, m
+```
+This command creates a BELONGS_TO relationship between all students with a group id attribute of 'A' to all Group nodes with a grpId of 'A'. I did the same for Group B aswell.
+
+This is how I created the relationship between lectures and the subjects.  
+```
+MATCH (l:Lecturer {Name:"Damien Costello"}), (s:Subject {Name:"Mobile Applications Development 2"}) CREATE(l)-[:LECTURING]->(s) RETURN l, s
+```
+This command creates a LECTURING relationship between each Lecturer and a subject.  
+
+I then used csv files to create the relationships between the remaining nodes. Here is how I created the TAUGHT_AT relationship between the subject and the timeslot using a csv file.   
+CSV file snippet:  
+![alt text](images/snip2.PNG)    
+And the Command I used to create the Relationship:  
+```
+LOAD CSV FROM "file:///C:/timeSubjectRelationship.csv" AS row
+MATCH (t:TimeSlot {Name: toString(row[0])}), (s:Subject {Name: toString(row[1])})
+CREATE (s)-[:TAUGHT_AT]->(t);
+```
+For each row in the csv file a relationship is created between the subject and the timeslot. This is very handy when dealing with large data sets.
+
 [Top](#contents)  
 
 ## Queries<a name = "queries"></a>
