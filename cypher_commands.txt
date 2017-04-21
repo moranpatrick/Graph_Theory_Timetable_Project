@@ -1,0 +1,56 @@
+//Load Students from csv
+LOAD CSV WITH HEADERS FROM "file:///C:/student.csv" AS csvLine
+CREATE (s:Student {  Name: csvLine.name, GrpId: csvLine.grpId})
+
+//Load Rooms from csv
+LOAD CSV WITH HEADERS FROM "file:///C:/rooms.csv" AS csvLine
+CREATE (r:Room {Name: csvLine.name, Capacity: csvLine.capacity})
+
+//Load csv for student groups
+LOAD CSV WITH HEADERS FROM "file:///C:/studentGrp.csv" AS csvLine
+CREATE (g:Group { GrpId: csvLine.grpId})
+
+//Load CSV for TimeSlot
+LOAD CSV WITH HEADERS FROM "file:///C:/timeSlot.csv" AS csvLine
+CREATE (t:TimeSlot { Name: csvLine.name})
+
+//Load CSV for Lecturer
+LOAD CSV WITH HEADERS FROM "file:///C:/lecturer.csv" AS csvLine
+CREATE (l:Lecturer { Name: csvLine.name})
+
+//Load CSV for Subject
+LOAD CSV WITH HEADERS FROM "file:///C:/subject.csv" AS csvLine
+CREATE (s:Subject { Name: csvLine.name, Code: csv.Line.code})
+
+//Relationships Between Students and Groups
+MATCH (n:Student {GrpId:"A"}), (m:Group {GrpId:"A"}) CREATE(n)-[:BELONGS_TO]->(m) RETURN n, m
+MATCH (n:Student {GrpId:"B"}), (m:Group {GrpId:"B"}) CREATE(n)-[:BELONGS_TO]->(m) RETURN n, m
+
+//Relationships between lecturers and subjects
+MATCH (l:Lecturer {Name:"Damien Costello"}), (s:Subject {Name:"Mobile Applications Development 2"}) CREATE(l)-[:LECTURING]->(s) RETURN l, s
+MATCH (l:Lecturer {Name:"Ian McLoughlin"}), (s:Subject {Name:"Graph Theory"}) CREATE(l)-[:LECTURING]->(s) RETURN l, s
+MATCH (l:Lecturer {Name:"Martin Hynes"}), (s:Subject {Name:"Professional Practice in IT"}) CREATE(l)-[:LECTURING]->(s) RETURN l, s
+MATCH (l:Lecturer {Name:"Martin Hynes"}), (s:Subject {Name:"Software Testing"}) CREATE(l)-[:LECTURING]->(s) RETURN l, s
+MATCH (l:Lecturer {Name:"Patrick Mannion"}), (s:Subject {Name:"Database Management"}) CREATE(l)-[:LECTURING]->(s) RETURN l, s
+MATCH (l:Lecturer {Name:"Deirdre O Donovan"}), (s:Subject {Name:"Database Management"}) CREATE(l)-[:LECTURING]->(s) RETURN l, s
+MATCH (l:Lecturer {Name:"Gerard Harrison"}), (s:Subject {Name:"Server Side Rad"}) CREATE(l)-[:LECTURING]->(s) RETURN l, s
+
+//Create Relationships between subject and timeslot using csv
+LOAD CSV FROM "file:///C:/timeSubjectRelationship.csv" AS row
+MATCH (t:TimeSlot {Name: toString(row[0])}), (s:Subject {Name: toString(row[1])})
+CREATE (s)-[:TAUGHT_AT]->(t);
+
+//Create Relationships between group and timeslot using csv
+LOAD CSV FROM "file:///C:/TimeSlotGroupRelationship.csv" AS row
+MATCH (t:TimeSlot {Name: toString(row[0])}), (g:Group {GrpId: toString(row[1])})
+CREATE (g)-[:ATTENDS]->(t);
+
+//Create relation ship between timeslot and room
+LOAD CSV FROM "file:///C:/timeRoomRelationship.csv" AS row
+MATCH (t:TimeSlot {Name: toString(row[0])}), (r:Room {Name: toString(row[1])})
+CREATE (r)-[:ATTENDS]->(t);
+
+//Create Relationship bewteen timeslot and lecturer
+LOAD CSV FROM "file:///C:/TimsSlotLecturerRelationship.csv" AS row
+MATCH (t:TimeSlot {Name: toString(row[0])}), (l:Lecturer {Name: toString(row[1])})
+CREATE (l)-[:TEACHES_AT]->(t)

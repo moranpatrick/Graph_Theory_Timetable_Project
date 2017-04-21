@@ -97,9 +97,9 @@ Below is Information about All the nodes and relationships stored in the databas
 
 ## Implementation<a name = "implementation"></a>  
 Implementation of the database was broken down into three stages.
-1. Create The csv files
-2. Creating Nodes
-3. Creating Relationships between the nodes
+1. Creating the csv files
+2. Creating the Nodes
+3. Creating relationships between the nodes
 
 ###### Creating The CSV Files
 After some research online, I thought the best way to import data into the neo4j database, was with the use of csv files.  
@@ -120,11 +120,13 @@ List of csv files used.
   * Time Subject Relationship
   * Time Room Relationship  
 
-These csv file can be found in the CSV_Files folder at the [Top](#contents) of this readme. I found [Notepad++](https://notepad-plus-plus.org/download/v7.3.3.html) very useful for Creating and editing those csv files.
+These csv files can be found in the CSV_Files folder at the [Top](#contents) of this readme. I found [Notepad++](https://notepad-plus-plus.org/download/v7.3.3.html) very useful for Creating and editing those csv files.
 
 ###### Creating Nodes
-To show how I create these nodes, here is a snippet of the csv file.    
-![alt text](images/snip1.PNG)  
+To show how I create these nodes, here is a snippet of the csv file.  
+
+![alt text](images/snip1.png)  
+
 Here is the command I used to created the Student Nodes from that csv file.  
 ```
 LOAD CSV WITH HEADERS FROM "file:///C:/student.csv" AS csvLine
@@ -147,7 +149,9 @@ This command creates a LECTURING relationship between each Lecturer and a subjec
 
 I then used csv files to create the relationships between the remaining nodes. Here is how I created the TAUGHT_AT relationship between the subject and the timeslot using a csv file.   
 CSV file snippet:  
-![alt text](images/snip2.PNG)    
+
+![alt text](images/snip2.png)  
+
 And the Command I used to create the Relationship:  
 ```
 LOAD CSV FROM "file:///C:/timeSubjectRelationship.csv" AS row
